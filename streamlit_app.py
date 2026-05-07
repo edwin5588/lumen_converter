@@ -36,8 +36,12 @@ if b3.button("Clear all", use_container_width=True):
     st.session_state.well_grid = pd.DataFrame(False, index=rows, columns=cols)
     st.rerun()
 
-# Grid display
-col_cfg = {c: st.column_config.CheckboxColumn(c, width="small") for c in cols}
+# Grid display — narrow fixed-px columns so all 12 fit without horizontal scroll
+st.markdown("""<style>
+[data-testid="stDataEditor"] > div { overflow-x: hidden !important; }
+</style>""", unsafe_allow_html=True)
+col_cfg = {"_index": st.column_config.Column(width=28)}
+col_cfg.update({c: st.column_config.CheckboxColumn(c, width=46) for c in cols})
 edited = st.data_editor(
     st.session_state.well_grid,
     column_config=col_cfg,
