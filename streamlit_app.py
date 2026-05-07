@@ -21,7 +21,7 @@ if uploaded is not None:
         with open(out_path, "rb") as f:
             out_bytes = f.read()
 
-        out_name = os.path.splitext(uploaded.name)[0] + "_plates.xlsx"
+        out_name = os.path.splitext(uploaded.name)[0] + "CONVERTED_plates.xlsx"
         st.success("Conversion complete.")
         st.download_button(
             label="Download converted file",
